@@ -91,7 +91,7 @@
             </div>
             <hr>
             <div class="card-body text-center">
-            	<a href="login.jsp"><button type="button" class="btn btn-primary">Logout</button></a>
+            	<a href="/Authentication/"><button type="button" class="btn btn-primary">Logout</button></a>
             </div>
           </div>
         </div>
