@@ -14,7 +14,7 @@
 <body>
 <script type="text/javascript">
     document.getElementById("submit").onclick = function () {
-        location.href = "index.jsp";
+        location.href = "view/index.jsp";
     };
 </script>
 	<div class="container">
@@ -31,7 +31,7 @@
 						<input type="password" name="login-password" class="form-control" placeholder="Password">
 					</div>
 					<div class="text-center">
-						<a href="index.jsp"><button id="submit" class="btn btn-primary">Login</button></a>
+						<a href="view/index.jsp"><button id="submit" class="btn btn-primary">Login</button></a>
 					</div>
 				<%--</form>--%>
 			</div>
