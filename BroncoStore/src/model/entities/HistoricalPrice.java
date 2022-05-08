@@ -15,8 +15,8 @@ public class HistoricalPrice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="historicalPriceId")
+	private int historicalPriceId;
 
 	@Column(name="priceDate")
 	private String priceDate;
@@ -25,7 +25,7 @@ public class HistoricalPrice {
 	private double price;
 	
 	@ManyToOne
-	@JoinColumn(name="product_id")
+	@JoinColumn(name="productId")
 	private Product product;
 	
 	public HistoricalPrice(String priceDate, double price) {

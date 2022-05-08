@@ -8,7 +8,7 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Program Files (x86)/PostgreSQL/pgJDBC/postgresql-42.3.3.jar">
+	<classpathentry kind="lib" path="C:/Users/wkwan/OneDrive/Documents/GitHub/CS4800Project/BroncoStore/WebContent/WEB-INF/lib/postgresql-42.2.24.jre7.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>

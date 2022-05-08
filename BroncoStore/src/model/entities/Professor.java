@@ -4,7 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,8 +20,8 @@ public class Professor extends Customer{
 	@Column(name = "office")
 	private String office;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
+	@ManyToOne(cascade={CascadeType.PERSIST})
+	@JoinColumn(name="discountID")
 	private DiscountScheme discount;
 
 	public Professor(String name, int phone, String dateOfBirth, int addressNumber, String street, int zipCode,

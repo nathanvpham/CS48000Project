@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,14 +21,22 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="productId")
+	private int productId;
 	
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(mappedBy="product", cascade = {CascadeType.PERSIST})
-	@JoinColumn( name="historicalPrice_id")
+	@ManyToMany(cascade={CascadeType.PERSIST})
+	@JoinTable(
+			name="orders_product",
+			joinColumns=@JoinColumn(name="productId"),
+			inverseJoinColumns=@JoinColumn(name="orderID")
+			)
+	private List<Order> ordersList;
+	
+	@OneToMany(mappedBy="product",
+			cascade = {CascadeType.PERSIST})
 	private List<HistoricalPrice> prices;
 	
 	public Product(String name) {
