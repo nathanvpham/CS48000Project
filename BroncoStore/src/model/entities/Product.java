@@ -37,9 +37,17 @@ public class Product {
 		if(prices == null) {
 			prices = new ArrayList<>();
 		}
-		prices.add(price);
-		
+		prices.add(price);		
 		price.setProduct(this);
+	}
+	
+	public double getPrice(int i) {
+		return prices.get(i).getPrice();
+	}
+	//to get the currentPrice
+	public double getPrice() {
+		return prices.get(0).getPrice();
+
 	}
 
 }

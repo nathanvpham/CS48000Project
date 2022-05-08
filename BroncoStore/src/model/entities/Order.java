@@ -68,6 +68,13 @@ public class Order {
 	public String getTime() {
 		return time;		
 	}
+	public double getPrice() {
+		double totalPrice = 0.0;
+		for(int i = 0; i < products.size(); ++i) {
+			totalPrice += products.get(i).getPrice();
+		}
+		return totalPrice;
+	}
 	
 	
 }
