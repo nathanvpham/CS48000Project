@@ -51,5 +51,9 @@ public class Product {
 		
 		price.setProduct(this);
 	}
+	
+	public double getCurrentPrice() {
+		return prices.get(0).getPrice();
+	}
 
 }

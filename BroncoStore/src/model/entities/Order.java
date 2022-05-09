@@ -40,7 +40,7 @@ public class Order {
 			joinColumns=@JoinColumn(name="order_id"),
 			inverseJoinColumns=@JoinColumn(name="product_id")
 			)
-	private List<Product> productList;
+	private ArrayList<Product> productList;
 	
 	public Order(String date, String time) {
 		this.date = date;
@@ -53,7 +53,7 @@ public class Order {
 	
 	public void add(Product product) {
 		if(productList == null) {
-			productList = new ArrayList<>();
+			productList = new ArrayList<Product>();
 		}
 		productList.add(product);
 	}
@@ -72,6 +72,15 @@ public class Order {
 	
 	public String getTime() {
 		return time;		
+	}
+	
+	public double getTotalPrice() {
+		double total = 0;
+		for(int i = 0; i < productList.size(); ++i) {
+			total += productList.get(i).getCurrentPrice();
+		}
+		
+		return total;
 	}
 	
 	
