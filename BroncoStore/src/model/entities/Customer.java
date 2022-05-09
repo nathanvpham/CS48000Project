@@ -1,21 +1,21 @@
 package model.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 @Entity
-@Table(name="customer")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Customer {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "broncoId")
 	private int broncoId;
 	
 	@Column(name = "name")
@@ -24,7 +24,7 @@ public class Customer {
 	@Column(name = "phone")
 	private int phone;
 	
-	@Column(name = "dateOfBirth")
+	@Column(name = "dob")
 	private String dateOfBirth;
 	
 	@Column(name = "zipCode")
@@ -42,7 +42,9 @@ public class Customer {
 	@Column(name = "street")
 	private String street;
 	
-
+	@OneToMany(mappedBy="customer",
+			cascade= {CascadeType.PERSIST})
+	private List<Order> orders;
 	
 	public Customer(String name, int phone, String dateOfBirth, int addressNumber,
 			String street, int zipCode, String city, String state ) {

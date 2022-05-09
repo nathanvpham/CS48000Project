@@ -3,7 +3,7 @@ package model.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 public class Student extends Customer {
 	
@@ -19,8 +19,8 @@ public class Student extends Customer {
 	@Column(name = "enterDate")
 	private String enterDate;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
+	@ManyToOne(cascade={CascadeType.PERSIST})
+	@JoinColumn(name="discountID")
 	private DiscountScheme discount;	
 
 	public Student(String name, int phone, String dateOfBirth, int addressNumber, String street, int zipCode,

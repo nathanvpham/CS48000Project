@@ -10,18 +10,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name="orders")
 public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int discountId;
+	@Column(name="orderID")
+	private int orderID;
 	
 	@Column(name="date")
 	private String date;
@@ -30,12 +31,16 @@ public class Order {
 	private String time;
 	
 	@ManyToOne
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name="broncoId")
 	Customer customer;
 	
-	@OneToMany(mappedBy="product", cascade = {CascadeType.PERSIST})
-	@JoinColumn( name="product_id")
-	private List<Product> products;
+	@ManyToMany(cascade={CascadeType.PERSIST})
+	@JoinTable(
+			name="orders_products",
+			joinColumns=@JoinColumn(name="order_id"),
+			inverseJoinColumns=@JoinColumn(name="product_id")
+			)
+	private List<Product> productList;
 	
 	public Order(String date, String time) {
 		this.date = date;
@@ -47,10 +52,10 @@ public class Order {
 	}
 	
 	public void add(Product product) {
-		if(products == null) {
-			products = new ArrayList<>();
+		if(productList == null) {
+			productList = new ArrayList<>();
 		}
-		products.add(product);
+		productList.add(product);
 	}
 	
 	public void setDate(String date) {
@@ -67,13 +72,6 @@ public class Order {
 	
 	public String getTime() {
 		return time;		
-	}
-	public double getPrice() {
-		double totalPrice = 0.0;
-		for(int i = 0; i < products.size(); ++i) {
-			totalPrice += products.get(i).getPrice();
-		}
-		return totalPrice;
 	}
 	
 	
