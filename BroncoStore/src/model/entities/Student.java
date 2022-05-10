@@ -21,13 +21,13 @@ public class Student extends Customer {
 	
 	@ManyToOne(cascade={CascadeType.PERSIST})
 	@JoinColumn(name="discountID")
-	private DiscountScheme discount;	
+	private DiscountScheme discount;
 
-	public Student(String name, int phone, String dateOfBirth, int addressNumber, String street, int zipCode,
+	public Student(int id, String name, int phone, String dateOfBirth, int addressNumber, String street, int zipCode,
 			String city, String state, String minor, String major, String gradDate, String enterDate, 
 			DiscountScheme discount) {
-		super(name, phone, dateOfBirth, addressNumber, street, zipCode, city, state);
-		// TODO Auto-generated constructor stub
+		super(id, name, phone, dateOfBirth, addressNumber, street, zipCode, city, state);
+		
 		this.minor = minor;
 		this.major = major;
 		this.gradDate = gradDate;

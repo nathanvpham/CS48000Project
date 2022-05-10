@@ -11,7 +11,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Customer {
 	
 	@Id
@@ -46,8 +46,9 @@ public class Customer {
 			cascade= {CascadeType.PERSIST})
 	private List<Order> orders;
 	
-	public Customer(String name, int phone, String dateOfBirth, int addressNumber,
+	public Customer(int id, String name, int phone, String dateOfBirth, int addressNumber,
 			String street, int zipCode, String city, String state ) {
+		this.broncoId = id;
 		this.name = name;
 		this.phone = phone;
 		this.dateOfBirth = dateOfBirth;
@@ -57,6 +58,10 @@ public class Customer {
 		this.zipCode = zipCode;
 		this.state = state;
 
+	}
+	
+	public void setBroncoId(int id) {
+		this.broncoId = id;
 	}
 	
 	public void setName(String name) {
@@ -79,6 +84,9 @@ public class Customer {
 	}
 	public void setState(String sta) {
 		state = sta;
+	}
+	public int getBroncoId() {
+		return broncoId;
 	}
 	public String getName() {
 		return name;

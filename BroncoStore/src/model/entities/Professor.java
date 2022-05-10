@@ -24,9 +24,9 @@ public class Professor extends Customer{
 	@JoinColumn(name="discountID")
 	private DiscountScheme discount;
 
-	public Professor(String name, int phone, String dateOfBirth, int addressNumber, String street, int zipCode,
+	public Professor(int id, String name, int phone, String dateOfBirth, int addressNumber, String street, int zipCode,
 			String city, String state, String department, String research, String office, DiscountScheme discount) {
-		super(name, phone, dateOfBirth, addressNumber, street, zipCode, city, state);
+		super(id, name, phone, dateOfBirth, addressNumber, street, zipCode, city, state);
 		
 		this.department = department;
 		this.research = research;

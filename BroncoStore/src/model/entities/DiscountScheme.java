@@ -23,9 +23,11 @@ public class DiscountScheme {
 	@Column(name="discountPrice")
 	private float discountPrice;
 	
+	/*
 	@OneToMany(mappedBy="discount",
 			cascade={CascadeType.PERSIST})
 	private List<Student> students;
+	*/
 	
 	@OneToMany(mappedBy="discount",
 			cascade={CascadeType.PERSIST})
