@@ -76,7 +76,7 @@ public class CrudCalls {
 		
 		session.beginTransaction();
 		
-		List<Product> result = session.createQuery(hql).setParameter("name", Product.getName()).list();
+		List<Product> result = session.createQuery(hql).setParameter("name", products.getName()).list();
 		
 		sessionFactory.close();
 		return result.get(0);
