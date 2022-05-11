@@ -21,16 +21,16 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="productId")
-	private int productId;
+	@Column(name="productID")
+	private int productID;
 	
 	@Column(name="name")
 	private String name;
 	
 	@ManyToMany(cascade={CascadeType.PERSIST})
 	@JoinTable(
-			name="orders_product",
-			joinColumns=@JoinColumn(name="productId"),
+			name="order_product",
+			joinColumns=@JoinColumn(name="productID"),
 			inverseJoinColumns=@JoinColumn(name="orderID")
 			)
 	private List<Order> ordersList;
@@ -39,17 +39,29 @@ public class Product {
 			cascade = {CascadeType.PERSIST})
 	private List<HistoricalPrice> prices;
 	
+	public Product() {
+		
+	}
+	
 	public Product(String name) {
 		this.name = name;
 	}
 	
-	public void add(HistoricalPrice price) {
+	public void addHistPrice(HistoricalPrice price) {
 		if(prices == null) {
 			prices = new ArrayList<>();
 		}
 		prices.add(price);
 		
 		price.setProduct(this);
+	}
+	
+	public int getProductID() {
+		return this.productID;
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 	
 	public double getCurrentPrice() {

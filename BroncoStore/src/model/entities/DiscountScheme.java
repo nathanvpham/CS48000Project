@@ -33,9 +33,14 @@ public class DiscountScheme {
 			cascade={CascadeType.PERSIST})
 	private List<Professor> professor;
 	
+	public DiscountScheme() {
+		
+	}
+	
 	public DiscountScheme(float price) {
 		discountPrice = price;
 	}
+	
 	public void setDiscount(float price) {
 		discountPrice = price;
 	}

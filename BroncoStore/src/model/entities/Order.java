@@ -1,6 +1,8 @@
 package model.entities;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,10 +27,10 @@ public class Order {
 	private int orderID;
 	
 	@Column(name="date")
-	private String date;
+	private Date date;
 	
 	@Column(name="time")
-	private String time;
+	private Time time;
 	
 	@ManyToOne
 	@JoinColumn(name="broncoId")
@@ -36,41 +38,45 @@ public class Order {
 	
 	@ManyToMany(cascade={CascadeType.PERSIST})
 	@JoinTable(
-			name="orders_products",
-			joinColumns=@JoinColumn(name="order_id"),
-			inverseJoinColumns=@JoinColumn(name="product_id")
+			name="order_product",
+			joinColumns=@JoinColumn(name="orderID"),
+			inverseJoinColumns=@JoinColumn(name="productID")
 			)
 	private List<Product> productList;
 	
-	public Order(String date, String time) {
+	public Order() {
+		
+	}
+	
+	public Order(Date date, Time time) {
 		this.date = date;
 		this.time = time;
 	}
 	
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	
-	public void add(Product product) {
+	public void addProduct(Product product) {
 		if(productList == null) {
 			productList = new ArrayList<>();
 		}
 		productList.add(product);
 	}
 	
-	public void setDate(String date) {
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
-	public void setTime(String time) {
+	public void setTime(Time time) {
 		this.time = time;
 	}
 	
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public String getTime() {
+	public Time getTime() {
 		return time;		
 	}
 	
