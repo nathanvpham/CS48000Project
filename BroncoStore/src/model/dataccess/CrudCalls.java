@@ -58,14 +58,14 @@ public class CrudCalls {
 		
 		Session session = sessionFactory.getCurrentSession();
 		
-		List<Student> result = session.createQuery(hql).setParameter("name", customer.getName()).list();
+		List<Customer> result = session.createQuery(hql).setParameter("name", customer.getName()).list();
 		
 		session.getTransaction().commit();
 
 		return result.get(0);
 		
 		}
-	public Customer findProducts(String name) {
+	public Product findProducts(String name) {
 		Product products = new Product(name);
 		String hql = "from Product s where s.name=:name";
 		
@@ -76,7 +76,7 @@ public class CrudCalls {
 		
 		session.beginTransaction();
 		
-		List<Student> result = session.createQuery(hql).setParameter("name", Product.getName()).list();
+		List<Product> result = session.createQuery(hql).setParameter("name", products.getName()).list();
 		
 		sessionFactory.close();
 		return result.get(0);
@@ -85,7 +85,7 @@ public class CrudCalls {
 	
 	public void deleteProduct(Product product) {	
 		
-		int productId = product.getId();
+		int productId = product.getProductID();
 				
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
 				addAnnotatedClass(Product.class).buildSessionFactory();
