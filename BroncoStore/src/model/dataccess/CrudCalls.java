@@ -66,7 +66,7 @@ public class CrudCalls {
 		
 		}
 	public Customer findProducts(String name) {
-		Product products = new Product(name));
+		Product products = new Product(name);
 		String hql = "from Product s where s.name=:name";
 		
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
@@ -83,9 +83,7 @@ public class CrudCalls {
 		
 	}
 	
-	public void deleteProduct(Product product) {
-		
-		
+	public void deleteProduct(Product product) {	
 		
 		int productId = product.getId();
 				
