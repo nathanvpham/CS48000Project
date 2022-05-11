@@ -1,6 +1,8 @@
 package model.entities;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,63 +12,81 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name="orders")
 public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int discountId;
+	@Column(name="orderID")
+	private int orderID;
 	
 	@Column(name="date")
-	private String date;
+	private Date date;
 	
 	@Column(name="time")
-	private String time;
+	private Time time;
 	
 	@ManyToOne
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name="broncoId")
 	Customer customer;
 	
-	@OneToMany(mappedBy="product", cascade = {CascadeType.PERSIST})
-	@JoinColumn( name="product_id")
-	private List<Product> products;
+	@ManyToMany(cascade={CascadeType.PERSIST})
+	@JoinTable(
+			name="order_product",
+			joinColumns=@JoinColumn(name="orderID"),
+			inverseJoinColumns=@JoinColumn(name="productID")
+			)
+	private List<Product> productList;
 	
-	public Order(String date, String time) {
+	public Order() {
+		
+	}
+	
+	public Order(Date date, Time time) {
 		this.date = date;
 		this.time = time;
+	}
+	
+	public void addProduct(Product product) {
+		if(productList == null) {
+			productList = new ArrayList<>();
+		}
+		productList.add(product);
 	}
 	
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 	
-	public void add(Product product) {
-		if(products == null) {
-			products = new ArrayList<>();
-		}
-		products.add(product);
-	}
-	
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
-	public void setTime(String time) {
+	public void setTime(Time time) {
 		this.time = time;
 	}
 	
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
-	public String getTime() {
+	public Time getTime() {
 		return time;		
+	}
+	
+	public double calculateTotalPrice() {
+		double total = 0;
+		for(int i = 0; i < productList.size(); ++i) {
+			total += productList.get(i).getCurrentPrice();
+		}
+		
+		return total;
 	}
 	
 	

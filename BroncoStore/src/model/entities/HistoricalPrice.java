@@ -1,5 +1,7 @@
 package model.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,20 +17,24 @@ public class HistoricalPrice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="historicalPriceId")
+	private int historicalPriceId;
 
 	@Column(name="priceDate")
-	private String priceDate;
+	private Date priceDate;
 	
 	@Column(name="price")
 	private double price;
 	
 	@ManyToOne
-	@JoinColumn(name="product_id")
+	@JoinColumn(name="productID")
 	private Product product;
 	
-	public HistoricalPrice(String priceDate, double price) {
+	public HistoricalPrice() {
+		
+	}
+	
+	public HistoricalPrice(Date priceDate, double price) {
 		this.priceDate = priceDate;
 		this.price = price;
 	}
@@ -41,7 +47,7 @@ public class HistoricalPrice {
 		this.price = price;
 	}
 	
-	public void SetPriceDate(String date) {
+	public void SetPriceDate(Date date) {
 		priceDate = date;
 	}
 	
@@ -49,7 +55,7 @@ public class HistoricalPrice {
 		return price;
 	}
 	
-	public String getPriceDate() {
+	public Date getPriceDate() {
 		return priceDate;
 	}
 }

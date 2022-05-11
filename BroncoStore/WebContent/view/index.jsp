@@ -1,5 +1,12 @@
+<%@page import="model.dataccess.*"%>
+<%@page import="model.entities.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%
+ 	List<Product> products = null;
+    
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,23 +44,32 @@
 		<div class="card-header my-3">All Products</div>
 			<div id="products">
 				<div class="row">
+					<div class="card" style="width: 20rem;">
+						<div class="card-body">
+							<h5 class="card-title">Product</h5>
+							<p class="price">Price: $10</p>
+							<div class="text-center">
+								<a class="btn btn-primary" href="#">Add to Cart</a> 
+							</div>
+						</div>
+					</div>
 				<%
-				if (!products.isEmpty()) {
+				if (products != null) {
 					for (Product p : products) {
 				%> 
 					<div class="card" style="width: 20rem;">
 						<div class="card-body">
 							<h5 class="card-title"><%=p.getName() %></h5>
-							<p class="price">Price: $<%=p.getPrice() %></p>
+							<p class="price">Price: $<%=p.getCurrentPrice() %></p>
 							<div class="text-center">
-								<a class="btn btn-primary" href="add-to-cart?id=<%=p.getId()%>">Add to Cart</a> 
+								<a class="btn btn-primary" href="#">Add to Cart</a> 
 							</div>
 						</div>
 					</div>
 				<%
 				}
 				} else {
-				out.println("There is no products");
+				out.println();
 				}
 				%>
 				</div>

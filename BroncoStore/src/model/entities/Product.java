@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,27 +21,51 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
+	@Column(name="productID")
+	private int productID;
 	
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(mappedBy="product", cascade = {CascadeType.PERSIST})
-	@JoinColumn( name="historicalPrice_id")
+	@ManyToMany(cascade={CascadeType.PERSIST})
+	@JoinTable(
+			name="order_product",
+			joinColumns=@JoinColumn(name="productID"),
+			inverseJoinColumns=@JoinColumn(name="orderID")
+			)
+	private List<Order> ordersList;
+	
+	@OneToMany(mappedBy="product",
+			cascade = {CascadeType.PERSIST})
 	private List<HistoricalPrice> prices;
+	
+	public Product() {
+		
+	}
 	
 	public Product(String name) {
 		this.name = name;
 	}
 	
-	public void add(HistoricalPrice price) {
+	public void addHistPrice(HistoricalPrice price) {
 		if(prices == null) {
 			prices = new ArrayList<>();
 		}
 		prices.add(price);
 		
 		price.setProduct(this);
+	}
+	
+	public int getProductID() {
+		return this.productID;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public double getCurrentPrice() {
+		return prices.get(0).getPrice();
 	}
 
 }

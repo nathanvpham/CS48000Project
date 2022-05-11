@@ -6,22 +6,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import model.entities.Customer;
-import model.entities.DiscountScheme;
-import model.entities.HistoricalPrice;
-import model.entities.Order;
-import model.entities.Product;
-import model.entities.Professor;
-import model.entities.Student;
+import model.entities.*;
 
 public class CrudCalls {
 	
 	
 	public List<Product> getListOfProducts(){
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
-				addAnnotatedClass(Product.class).buildSessionFactory();
+				addAnnotatedClass(Customer.class).
+             	addAnnotatedClass(Student.class).
+             	addAnnotatedClass(Professor.class).
+             	addAnnotatedClass(DiscountScheme.class).
+             	addAnnotatedClass(Order.class).
+             	addAnnotatedClass(Product.class).
+             	addAnnotatedClass(HistoricalPrice.class).buildSessionFactory();
 		
 		Session session = sessionFactory.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		@SuppressWarnings("unchecked")
 		List<Product> products = session.createQuery("from product").getResultList();
@@ -36,7 +38,13 @@ public class CrudCalls {
 	
 	public List<Order> getListOfOrders(){
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
-				addAnnotatedClass(Order.class).buildSessionFactory();
+				addAnnotatedClass(Customer.class).
+             	addAnnotatedClass(Student.class).
+             	addAnnotatedClass(Professor.class).
+             	addAnnotatedClass(DiscountScheme.class).
+             	addAnnotatedClass(Order.class).
+             	addAnnotatedClass(Product.class).
+             	addAnnotatedClass(HistoricalPrice.class).buildSessionFactory();
 		
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -54,9 +62,17 @@ public class CrudCalls {
 		String hql = "from Customer s where s.name=:name";
 		
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
-				addAnnotatedClass(Customer.class).buildSessionFactory();
+				addAnnotatedClass(Customer.class).
+             	addAnnotatedClass(Student.class).
+             	addAnnotatedClass(Professor.class).
+             	addAnnotatedClass(DiscountScheme.class).
+             	addAnnotatedClass(Order.class).
+             	addAnnotatedClass(Product.class).
+             	addAnnotatedClass(HistoricalPrice.class).buildSessionFactory();
 		
 		Session session = sessionFactory.getCurrentSession();
+		
+		session.beginTransaction();
 		
 		List<Customer> result = session.createQuery(hql).setParameter("name", customer.getName()).list();
 		
@@ -65,12 +81,19 @@ public class CrudCalls {
 		return result.get(0);
 		
 		}
+	
 	public Product findProducts(String name) {
 		Product products = new Product(name);
 		String hql = "from Product s where s.name=:name";
 		
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
-				addAnnotatedClass(Product.class).buildSessionFactory();
+				addAnnotatedClass(Customer.class).
+             	addAnnotatedClass(Student.class).
+             	addAnnotatedClass(Professor.class).
+             	addAnnotatedClass(DiscountScheme.class).
+             	addAnnotatedClass(Order.class).
+             	addAnnotatedClass(Product.class).
+             	addAnnotatedClass(HistoricalPrice.class).buildSessionFactory();
 		
 		Session session = sessionFactory.getCurrentSession();
 		
@@ -88,7 +111,13 @@ public class CrudCalls {
 		int productId = product.getProductID();
 				
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
-				addAnnotatedClass(Product.class).buildSessionFactory();
+				addAnnotatedClass(Customer.class).
+             	addAnnotatedClass(Student.class).
+             	addAnnotatedClass(Professor.class).
+             	addAnnotatedClass(DiscountScheme.class).
+             	addAnnotatedClass(Order.class).
+             	addAnnotatedClass(Product.class).
+             	addAnnotatedClass(HistoricalPrice.class).buildSessionFactory();
 		
 		Session session = sessionFactory.getCurrentSession();
 		

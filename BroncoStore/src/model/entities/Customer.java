@@ -1,13 +1,13 @@
 package model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Customer {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "broncoId")
 	private int broncoId;
 	
 	@Column(name = "name")
@@ -24,7 +24,7 @@ public class Customer {
 	@Column(name = "phone")
 	private int phone;
 	
-	@Column(name = "dateOfBirth")
+	@Column(name = "dob")
 	private String dateOfBirth;
 	
 	@Column(name = "zipCode")
@@ -42,10 +42,17 @@ public class Customer {
 	@Column(name = "street")
 	private String street;
 	
-
+	@OneToMany(mappedBy="customer",
+			cascade= {CascadeType.PERSIST})
+	private List<Order> orders;
 	
-	public Customer(String name, int phone, String dateOfBirth, int addressNumber,
-			String street, int zipCode, String city, String state ) {
+	public Customer() {
+		
+	}
+	
+	public Customer(int id, String name, int phone, String dateOfBirth, int addressNumber,
+			String street, int zipCode, String city, String state) {
+		this.broncoId = id;
 		this.name = name;
 		this.phone = phone;
 		this.dateOfBirth = dateOfBirth;
@@ -55,6 +62,19 @@ public class Customer {
 		this.zipCode = zipCode;
 		this.state = state;
 
+	}
+	
+	public void addOrder(Order order) {
+		if(orders == null) {
+			orders = new ArrayList<>();
+		}
+		orders.add(order);
+		
+		order.setCustomer(this);
+	}
+	
+	public void setBroncoId(int id) {
+		this.broncoId = id;
 	}
 	
 	public void setName(String name) {
@@ -77,6 +97,9 @@ public class Customer {
 	}
 	public void setState(String sta) {
 		state = sta;
+	}
+	public int getBroncoId() {
+		return broncoId;
 	}
 	public String getName() {
 		return name;
