@@ -26,6 +26,8 @@ public class CrudCalls {
 		@SuppressWarnings("unchecked")
 		List<Product> products = session.createQuery("from product").getResultList();
 		
+		session.getTransaction().commit();
+
 		sessionFactory.close();
 		
 		return products;
@@ -40,6 +42,8 @@ public class CrudCalls {
 		
 		List<Order> orders = session.createQuery("from orders").getResultList();
 		
+		session.getTransaction().commit();
+		
 		sessionFactory.close();
 		
 		return orders;
@@ -47,7 +51,7 @@ public class CrudCalls {
 	
 	public Customer findCustomerInfo(String name) {
 		Customer customer = new Customer(0, name, 0, null, 0, null, 0, null, null);
-		String hql = "from customer s where s.name=:name";
+		String hql = "from Customer s where s.name=:name";
 		
 		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
 				addAnnotatedClass(Customer.class).buildSessionFactory();
@@ -56,9 +60,50 @@ public class CrudCalls {
 		
 		List<Student> result = session.createQuery(hql).setParameter("name", customer.getName()).list();
 		
+		session.getTransaction().commit();
+
 		return result.get(0);
 		
 		}
+	public Customer findProducts(String name) {
+		Product products = new Product(name));
+		String hql = "from Product s where s.name=:name";
+		
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
+				addAnnotatedClass(Product.class).buildSessionFactory();
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		session.beginTransaction();
+		
+		List<Student> result = session.createQuery(hql).setParameter("name", Product.getName()).list();
+		
+		sessionFactory.close();
+		return result.get(0);
+		
+	}
+	
+	public void deleteProduct(Product product) {
+		
+		
+		
+		int productId = product.getId();
+				
+		SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").
+				addAnnotatedClass(Product.class).buildSessionFactory();
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		session.beginTransaction();
+
+		Product prod = session.get(Product.class, productId);
+		
+		session.delete(prod);
+		
+		session.getTransaction().commit();	
+		sessionFactory.close();
+		
+	}
 		
 	
 	
