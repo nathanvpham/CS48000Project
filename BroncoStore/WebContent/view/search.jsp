@@ -34,19 +34,27 @@
 	</nav>
 <body>
 	<div class="container">
-		<div class="card-header my-3">Specfic Item</div>
+		<div class="card-header my-3">Specific Item</div>
 		<div class="row">
-			<div class="card" style="width: 20rem;">
-				<img class="card-img-top" src="..." alt="Picture">
-				<div class="card-body">
-					    <h5 class="name">Specfic Item</h5>
-					    <p class="price">Price: $10</p>
-					    <div class="text-center">
-					    	<a href="#" class="btn btn-primary">Add to Cart</a>
-					    </div>
-				 </div>
-			</div>
-
+				<%
+				if (!products.isEmpty()) {
+					for (Product p : products) {
+				%> 
+					<div class="card" style="width: 20rem;">
+						<div class="card-body">
+							<h5 class="card-title"><%=p.getName() %></h5>
+							<p class="price">Price: $<%=p.getPrice() %></p>
+							<div class="text-center">
+								<a class="btn btn-primary" href="add-to-cart?id=<%=p.getId()%>">Add to Cart</a> 
+							</div>
+						</div>
+					</div>
+				<%
+				}
+				} else {
+				out.println("There is no products");
+				}
+				%>
 		</div>
 	</div>
 <body>

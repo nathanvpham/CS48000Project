@@ -12,28 +12,23 @@
 <title>Bronco Store</title>
 </head>
 <body>
-<script type="text/javascript">
-    document.getElementById("submit").onclick = function () {
-        location.href = "view/index.jsp";
-    };
-</script>
 	<div class="container">
 		<div class="card w-50 mx-auto my-5">
 			<div class="card-header text-center">Log in to Cal Poly Pomona</div>
 			<div class="card-body">
-				<%--<form action="user-login" method="post">--%>
+				<form action="login" method="post">
 					<div class="form-group">
 						<label>Email address</label> 
-						<input type="email" name="login-email" class="form-control" placeholder="Enter email">
+						<input name="login-email" class="form-control" placeholder="Enter email">
 					</div>
 					<div class="form-group">
 						<label>Password</label> 
 						<input type="password" name="login-password" class="form-control" placeholder="Password">
 					</div>
 					<div class="text-center">
-						<a href="view/index.jsp"><button id="submit" class="btn btn-primary">Login</button></a>
+						<button id="submit" class="btn btn-primary">Login</button>
 					</div>
-				<%--</form>--%>
+				</form>
 			</div>
 		</div>
 	</div>

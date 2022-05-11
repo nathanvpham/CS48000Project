@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutY="51.0" prefHeight="349.0" prefWidth="600.0" />
+      <AnchorPane prefHeight="52.0" prefWidth="600.0" style="-fx-background-color: rgba(0,0,0,.03);">
+         <children>
+            <ButtonBar layoutX="284.0" layoutY="5.0" prefHeight="40.0" prefWidth="310.0">
+              <buttons>
+                  <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: rgba(0,0,0,.03);" text="Home" />
+                <Button mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: rgba(0,0,0,.03);" text="Account" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="103.0" style="-fx-background-color: rgba(0,0,0,.03);" text="Orders" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="119.0" style="-fx-background-color: rgba(0,0,0,.03);" text="Cart" />
+              </buttons>
+            </ButtonBar>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
